@@ -7,7 +7,7 @@ function AdminPage() {
       {/* LEFT */}
       <div className="w-full lg:w-2/3">
         {/* User Card */}
-        <div className="flex gap-4 justify-between">
+        <div className="flex gap-4 justify-between flex-wrap">
           {userCard.map((h) => (
             <UserCard type={h} />
           ))}
