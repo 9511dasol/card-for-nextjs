@@ -1,4 +1,6 @@
+import Announcements from "@/components/Announcements";
 import BigCalendar from "@/components/BigCalender";
+import EventCalendar from "@/components/EventCalendar";
 
 function StudentPage() {
   return (
@@ -11,7 +13,10 @@ function StudentPage() {
         </div>
       </div>
       {/* Right */}
-      <div className="w-full xl:w-1/3"></div>
+      <div className="w-full xl:w-1/3">
+        <EventCalendar />
+        <Announcements />
+      </div>
     </div>
   );
 }
