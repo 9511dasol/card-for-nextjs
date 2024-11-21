@@ -1,8 +1,35 @@
 // TEMPORARY DATA
 
+import { number } from "zod";
+
+export type Student = {
+  id: number;
+  studentId: string;
+  name: string;
+  email: string;
+  photo: string;
+  phone: string;
+  grade: number,
+  class: string;
+  address: string;
+}
+
+export type Teacher = {
+  id: number;
+  teacherId: string;
+  name: string;
+  email: string;
+  photo: string;
+  phone: string;
+  subjects: string[];
+  classes: string[];
+  address: string;
+}
+
+
 export let role = "admin";
 
-export const teachersData = [
+export const teachersData:Teacher[] = [
   {
     id: 1,
     teacherId: "1234567890",
@@ -125,7 +152,7 @@ export const teachersData = [
   },
 ];
 
-export const studentsData = [
+export const studentsData: Student[] = [
   {
     id: 1,
     studentId: "1234567890",

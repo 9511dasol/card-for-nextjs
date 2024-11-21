@@ -1,3 +1,4 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
@@ -11,7 +12,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-type Assignment = {
+type Result = {
   id: number;
   subject: string;
   class: number;
@@ -30,7 +31,6 @@ const columns = [
   {
     header: "Student",
     accessor: "student",
-    className: "hidden md:table-cell",
   },
   {
     header: "Score",
@@ -38,10 +38,14 @@ const columns = [
     className: "hidden md:table-cell",
   },
   {
+    header: "Teacher",
+    accessor: "teacher",
+    className: "hidden md:table-cell",
+  },
+  {
     header: "Class",
     accessor: "class",
   },
-
   {
     header: "Date",
     accessor: "date",
@@ -53,7 +57,7 @@ const columns = [
   },
 ];
 
-function renderRow(item: Assignment) {
+function renderRow(item: Result) {
   return (
     <tr
       key={item.id}
@@ -73,9 +77,10 @@ function renderRow(item: Assignment) {
             </button>
           </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="result" type="update" />
+              <FormModal table="result" type="delete" />
+            </>
           )}
         </div>
       </td>
@@ -98,11 +103,7 @@ function ResultList() {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
-            )}
+            {role === "admin" && <FormModal table="result" type="create" />}
           </div>
         </div>
       </div>
