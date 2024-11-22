@@ -1,3 +1,6 @@
+'use client';
+
+import { useAppSelector } from '@/redux/hooks';
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -15,6 +18,7 @@ type Class = {
 };
 
 function renderRow(item: Class) {
+  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
   return (
     <tr
       key={item.id}
@@ -31,7 +35,7 @@ function renderRow(item: Class) {
               <Image src="/edit.png" alt="" width={16} height={16} />
             </button>
           </Link>
-          {role === "admin" && (
+          {userRole === "ADMIN" && (
             <>
               <FormModal table="class" type="update" data={item} />
               <FormModal table="class" type="delete" id={item.id} />

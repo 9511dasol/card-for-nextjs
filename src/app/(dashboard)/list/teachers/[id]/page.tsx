@@ -1,3 +1,6 @@
+'use client';
+
+import { useAppSelector } from '@/redux/hooks';
 import Announcements from "@/components/Announcements";
 import BigCalendar from "@/components/BigCalender";
 import FormModal from "@/components/FormModal";
@@ -10,6 +13,7 @@ interface IParams {
   params: { id: string };
 }
 function Teacherpage({ params: { id } }: IParams) {
+  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
   const data: Teacher = teachersData[+id];
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
@@ -31,7 +35,7 @@ function Teacherpage({ params: { id } }: IParams) {
             <div className="w-2/3 flex flex-col justify-between gap-4">
               <div className="flex items-center gap-4">
                 <h1 className="text-xl font-semibold">{data.name}</h1>
-                {role === "admin" && (
+                {userRole === "ADMIN" && (
                   <FormModal
                     table="teacher"
                     type="update"

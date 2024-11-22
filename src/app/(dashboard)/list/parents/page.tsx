@@ -1,3 +1,6 @@
+'use client';
+
+import { useAppSelector } from '@/redux/hooks';
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -16,6 +19,7 @@ type Parent = {
 };
 
 function renderRow(item: Parent) {
+  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
   return (
     <tr
       key={item.id}
@@ -33,7 +37,7 @@ function renderRow(item: Parent) {
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/teachers/${item.id}`}></Link>
-          {role === "admin" && (
+          {userRole === "ADMIN" && (
             <>
               <FormModal table="parent" type="update" data={item} />
               <FormModal table="parent" type="delete" id={item.id} />
@@ -72,6 +76,7 @@ const columns = [
 ];
 
 function ParentList() {
+  
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}

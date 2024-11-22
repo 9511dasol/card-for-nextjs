@@ -4,37 +4,32 @@ import "boxicons/css/boxicons.min.css";
 import "./main.css";
 import { useRouter } from "next/navigation";
 import { boolean, object } from "zod";
-import { useAppDispatch } from '@/redux/hooks';
-import { login, UserRole } from '@/redux/features/authSlice';
+import { useAppDispatch } from "@/redux/hooks";
+import { login, UserRole } from "@/redux/features/authSlice";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [pw, setPw] = useState<string>("");
   const [state, setState] = useState<string>("Login");
   const router = useRouter();
-  const [lgin, setLgin] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   function loginn() {
     const temp = userId.at(0)?.toLowerCase();
     if (temp === "a") {
-      setLgin(true);
       dispatch(login({ userId, userRole: UserRole.ADMIN }));
     } else if (temp === "s") {
-      setLgin(true);
       dispatch(login({ userId, userRole: UserRole.STUDENT }));
     } else if (temp === "t") {
-      setLgin(true);
       dispatch(login({ userId, userRole: UserRole.TEACHER }));
     } else if (temp === "p") {
-      setLgin(true);
       dispatch(login({ userId, userRole: UserRole.PARENT }));
     } else {
       alert("다시 입력해주세요");
-      setLgin(false);
       return;
     }
 
-    if (lgin && pw) {
+    
+    if (pw) {
       if (temp === "a") {
         router.push("/admin");
       } else if (temp === "s") {
@@ -44,7 +39,10 @@ const Login = () => {
       } else if (temp === "p") {
         router.push("/parent");
       }
-    } else console.log("다시 입력하여 주십시오");
+    } else {
+      console.log(pw, userId);
+      return;
+    }
   }
 
   const enter = (e: React.KeyboardEvent<HTMLInputElement>) => {

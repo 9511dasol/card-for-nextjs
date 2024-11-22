@@ -1,3 +1,6 @@
+'use client';
+
+import { useAppSelector } from '@/redux/hooks';
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -35,6 +38,7 @@ const columns = [
 ];
 
 function renderRow(item: Lesson) {
+  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
   return (
     <tr
       key={item.id}
@@ -45,7 +49,7 @@ function renderRow(item: Lesson) {
       <td className="hidden md:table-cell">{item.teacher}</td>
       <td>
         <div className="flex items-center gap-2">
-          {role === "admin" && (
+          {userRole === "ADMIN" && (
             <>
               <FormModal table="lesson" type="update" id={item.id} />
               <FormModal table="lesson" type="delete" id={item.id} />
