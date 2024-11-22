@@ -1,13 +1,36 @@
+"use client";
 import Menu from "@/components/Menu";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect, useState } from "react";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const { isLoggedIn, userId, userRole } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/");
+      console.log("first")
+    } else {
+      setIsLoading(false);
+    }
+  }, [isLoggedIn]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // 또는 로딩 스피너 컴포넌트
+  }
+
   return (
     <div className="h-screen flex">
       {/* LEFT */}

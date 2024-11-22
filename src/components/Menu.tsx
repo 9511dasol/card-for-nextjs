@@ -1,10 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { logout } from "../redux/features/authSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
