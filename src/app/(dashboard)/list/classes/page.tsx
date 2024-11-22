@@ -17,35 +17,7 @@ type Class = {
   supervisor: string;
 };
 
-function renderRow(item: Class) {
-  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
-  return (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
-    >
-      <td className="flex items-center gap-4 p-4">{item.name}</td>
-      <td className="hidden md:table-cell">{item.capacity}</td>
-      <td className="hidden md:table-cell">{item.grade}</td>
-      <td className="hidden md:table-cell">{item.supervisor}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
-          {userRole === "ADMIN" && (
-            <>
-              <FormModal table="class" type="update" data={item} />
-              <FormModal table="class" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
-}
+
 
 const columns = [
   {
@@ -74,6 +46,35 @@ const columns = [
 ];
 
 function ClassList() {
+  function renderRow(item: Class) {
+    const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    return (
+      <tr
+        key={item.id}
+        className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
+      >
+        <td className="flex items-center gap-4 p-4">{item.name}</td>
+        <td className="hidden md:table-cell">{item.capacity}</td>
+        <td className="hidden md:table-cell">{item.grade}</td>
+        <td className="hidden md:table-cell">{item.supervisor}</td>
+        <td>
+          <div className="flex items-center gap-2">
+            <Link href={`/list/teachers/${item.id}`}>
+              <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+                <Image src="/edit.png" alt="" width={16} height={16} />
+              </button>
+            </Link>
+            {userRole === "ADMIN" && (
+              <>
+                <FormModal table="class" type="update" data={item} />
+                <FormModal table="class" type="delete" id={item.id} />
+              </>
+            )}
+          </div>
+        </td>
+      </tr>
+    );
+  }
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}

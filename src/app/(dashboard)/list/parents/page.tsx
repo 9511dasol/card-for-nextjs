@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from "@/redux/hooks";
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -17,37 +17,6 @@ type Parent = {
   students: string[];
   address: string;
 };
-
-function renderRow(item: Parent) {
-  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
-  return (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
-    >
-      <td className="flex items-center gap-4 p-4">
-        <div className="flex flex-col">
-          <h3 className="font-semibold">{item.name}</h3>
-          <p className="text-xs text-gray-500">{item?.email}</p>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.students.join(",")}</td>
-      <td className="hidden md:table-cell">{item.phone}</td>
-      <td className="hidden md:table-cell">{item.address}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}></Link>
-          {userRole === "ADMIN" && (
-            <>
-              <FormModal table="parent" type="update" data={item} />
-              <FormModal table="parent" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
-}
 
 const columns = [
   {
@@ -76,7 +45,38 @@ const columns = [
 ];
 
 function ParentList() {
-  
+  function renderRow(item: Parent) {
+    const { isLoggedIn, userId, userRole } = useAppSelector(
+      (state) => state.auth
+    );
+    return (
+      <tr
+        key={item.id}
+        className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
+      >
+        <td className="flex items-center gap-4 p-4">
+          <div className="flex flex-col">
+            <h3 className="font-semibold">{item.name}</h3>
+            <p className="text-xs text-gray-500">{item?.email}</p>
+          </div>
+        </td>
+        <td className="hidden md:table-cell">{item.students.join(",")}</td>
+        <td className="hidden md:table-cell">{item.phone}</td>
+        <td className="hidden md:table-cell">{item.address}</td>
+        <td>
+          <div className="flex items-center gap-2">
+            <Link href={`/list/teachers/${item.id}`}></Link>
+            {userRole === "ADMIN" && (
+              <>
+                <FormModal table="parent" type="update" data={item} />
+                <FormModal table="parent" type="delete" id={item.id} />
+              </>
+            )}
+          </div>
+        </td>
+      </tr>
+    );
+  }
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}

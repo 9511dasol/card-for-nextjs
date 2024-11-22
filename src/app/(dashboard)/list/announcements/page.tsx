@@ -1,5 +1,5 @@
-'use client';
-import { useAppSelector } from '@/redux/hooks';
+"use client";
+import { useAppSelector } from "@/redux/hooks";
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -36,36 +36,38 @@ const columns = [
   },
 ];
 
-function renderRow(item: Announcements) {
-  const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
-  return (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
-    >
-      <td className="flex items-center gap-4 p-4">{item.title}</td>
-      <td>{item.class}</td>
-      <td className="hidden md:table-cell">{item.date}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
-              <Image src="/view.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
-          {userRole === "ADMIN" && (
-            <>
-              <FormModal table="announcement" type="update" data={item} />
-              <FormModal table="announcement" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
-}
-
 function Anouncement() {
+  function renderRow(item: Announcements) {
+    const { isLoggedIn, userId, userRole } = useAppSelector(
+      (state) => state.auth
+    );
+    return (
+      <tr
+        key={item.id}
+        className="border-b border-gray-200 text-sm hover:bg-lamaPurpleLight"
+      >
+        <td className="flex items-center gap-4 p-4">{item.title}</td>
+        <td>{item.class}</td>
+        <td className="hidden md:table-cell">{item.date}</td>
+        <td>
+          <div className="flex items-center gap-2">
+            <Link href={`/list/teachers/${item.id}`}>
+              <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+                <Image src="/view.png" alt="" width={16} height={16} />
+              </button>
+            </Link>
+            {userRole === "ADMIN" && (
+              <>
+                <FormModal table="announcement" type="update" data={item} />
+                <FormModal table="announcement" type="delete" id={item.id} />
+              </>
+            )}
+          </div>
+        </td>
+      </tr>
+    );
+  }
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}

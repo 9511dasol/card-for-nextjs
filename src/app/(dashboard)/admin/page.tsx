@@ -14,7 +14,7 @@ function AdminPage() {
         {/* User Card */}
         <div className="flex gap-4 justify-between flex-wrap">
           {userCard.map((h, i) => (
-            <UserCard type={h} n={i} />
+            <UserCard type={h} n={i} key={i}/>
           ))}
         </div>
         {/* Middle charts */}
