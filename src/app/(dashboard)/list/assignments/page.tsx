@@ -45,8 +45,8 @@ const columns = [
 
 
 function AssignList() {
-  function renderRow(item: Assignment) {
     const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    function renderRow(item: Assignment) {
     return (
       <tr
         key={item.id}

@@ -45,10 +45,10 @@ const columns = [
 ];
 
 function ParentList() {
+  const { isLoggedIn, userId, userRole } = useAppSelector(
+    (state) => state.auth
+  );
   function renderRow(item: Parent) {
-    const { isLoggedIn, userId, userRole } = useAppSelector(
-      (state) => state.auth
-    );
     return (
       <tr
         key={item.id}

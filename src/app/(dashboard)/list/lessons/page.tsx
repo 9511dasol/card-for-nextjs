@@ -40,8 +40,8 @@ const columns = [
 
 
 function LessonList() {
-  function renderRow(item: Lesson) {
     const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    function renderRow(item: Lesson) {
     return (
       <tr
         key={item.id}

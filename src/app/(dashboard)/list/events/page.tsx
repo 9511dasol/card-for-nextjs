@@ -52,8 +52,8 @@ const columns = [
 
 
 function EventList() {
-  function renderRow(item: Events) {
     const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    function renderRow(item: Events) {
     return (
       <tr
         key={item.id}

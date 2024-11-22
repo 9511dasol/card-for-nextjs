@@ -55,8 +55,8 @@ const columns = [
 ];
 
 function StudentList() {
-  function renderRow(item: Student) {
     const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    function renderRow(item: Student) {
     return (
       <tr
         key={item.id}

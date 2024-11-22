@@ -37,10 +37,10 @@ const columns = [
 ];
 
 function Anouncement() {
+  const { isLoggedIn, userId, userRole } = useAppSelector(
+    (state) => state.auth
+  );
   function renderRow(item: Announcements) {
-    const { isLoggedIn, userId, userRole } = useAppSelector(
-      (state) => state.auth
-    );
     return (
       <tr
         key={item.id}

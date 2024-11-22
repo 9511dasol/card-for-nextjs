@@ -34,8 +34,8 @@ const columns = [
 ];
 
 function SubjectList() {
-  function renderRow(item: Subject) {
     const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
+    function renderRow(item: Subject) {
     return (
       <tr
         key={item.id}
