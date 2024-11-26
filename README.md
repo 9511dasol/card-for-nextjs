@@ -8,7 +8,7 @@
 
 ■ 개인 정보 조회, 수정, 생성 기능
 
-
+■ 로그인 정보에 따라 접근 이용할 수 있는 컨텐츠가 달라짐.
 
 [demo](https://dashboard-six-sandy-75.vercel.app/)
 
