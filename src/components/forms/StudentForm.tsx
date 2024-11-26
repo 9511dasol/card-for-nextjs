@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Schema, z } from "zod";
 import InputField from "../InputField";
 import Image from "next/image";
+import { Student as pupil } from "@/lib/data";
 
 const schema = z.object({
   username: z
@@ -13,9 +14,9 @@ const schema = z.object({
     .min(3, { message: "Username must be at least 3 characters long!" })
     .max(20, { message: "Username must be at most 20 characters long!" }),
   email: z.string().email({ message: "Invalid email address!" }),
-  password: z
-    .string()
-    .min(7, { message: "Password must be at least 8 characters long!" }),
+  studentId: z
+    .number()
+    .min(7, { message: "studentId must be at least 10 number!" }),
   firstName: z.string().min(1, { message: "First name is required" }),
   lastName: z.string().min(1, { message: "Last name is required" }),
   phone: z.string().min(1, { message: "Phone is required" }),
@@ -26,14 +27,14 @@ const schema = z.object({
   img: z.instanceof(File, { message: "Image is required" }),
 });
 
-type Teacher = {
-  type: "create" | "update" | "delete";
-  data?: any;
-};
-
 type Inputs = z.infer<typeof schema>;
 
-function TeacherForm({ type, data }: Teacher) {
+type Students = {
+  type: "create" | "update" | "delete";
+  data: any;
+};
+
+function StudentForm({ type, data }: Students) {
   const {
     register,
     handleSubmit,
@@ -42,11 +43,11 @@ function TeacherForm({ type, data }: Teacher) {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
-
+  const name: string[] = type === "update" ? data.name.split(" ") : ["", ""];
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-8">
       <h1 className="text-xl font-semibold">
-        {type === "create" ? <>Create a new Teacher</> : <>Update Teacher</>}
+        {type === "create" ? <>Create a new Student</> : <>Update Student</>}
       </h1>
       <span className="text-sm to-gray-400 font-medium">
         Authentication Information
@@ -56,7 +57,7 @@ function TeacherForm({ type, data }: Teacher) {
           lable="Username"
           name="username"
           type="text"
-          defaultValue={data?.username}
+          defaultValue={data?.name}
           register={register}
           error={errors.username}
         />
@@ -69,12 +70,12 @@ function TeacherForm({ type, data }: Teacher) {
           error={errors.email}
         />
         <InputField
-          lable="Password"
-          name="password"
-          type="password"
-          defaultValue={data?.password}
+          lable="studentId"
+          name="studentId"
+          type="text"
+          defaultValue={data?.studentId}
           register={register}
-          error={errors.password}
+          error={errors.studentId}
         />
       </div>
       <span className="text-sm to-gray-400 font-medium">
@@ -84,14 +85,14 @@ function TeacherForm({ type, data }: Teacher) {
         <InputField
           lable="First Name"
           name="firstName"
-          defaultValue={data?.firstName}
+          defaultValue={name[0]}
           register={register}
           error={errors.firstName}
         />
         <InputField
           lable="Last Name"
           name="lastName"
-          defaultValue={data?.lastName}
+          defaultValue={name[1]}
           register={register}
           error={errors.lastName}
         />
@@ -112,7 +113,7 @@ function TeacherForm({ type, data }: Teacher) {
         <InputField
           lable="BloodType"
           name="bloodType"
-          defaultValue={data?.bloodType}
+          defaultValue={data?.bloodType ? "a" : "o"}
           register={register}
           error={errors.bloodType}
         />
@@ -165,5 +166,5 @@ function TeacherForm({ type, data }: Teacher) {
     </form>
   );
 }
-// 41:11
-export default TeacherForm;
+
+export default StudentForm;

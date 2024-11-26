@@ -144,7 +144,7 @@ function Menu() {
           </span>
           {v.items.map((val) => {
             if (val.visible.includes(userRole.toLowerCase())) {
-              if (val.label === "Home") {
+              if (val.label === "Home" || val.label === "Logout") {
                 return (
                   <Link
                     href={val.href}

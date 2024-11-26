@@ -15,6 +15,9 @@ interface IParams {
 function Teacherpage({ params: { id } }: IParams) {
   const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
   const data: Teacher = teachersData[+id]; // database
+  const fullname:string[] = data.name.split(' ');
+  const firstName:string = fullname[1];
+  const lastNmae:string = fullname[0];
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
       {/* LEFT */}
@@ -44,8 +47,8 @@ function Teacherpage({ params: { id } }: IParams) {
                       username: data.name,
                       email: data.email,
                       password: "password",
-                      firstName:  data.name.split(' ')[1],
-                      lastName: data.name.split(' ')[0],
+                      firstName: firstName,
+                      lastName: lastNmae,
                       phone: `+82 ${data.phone}`,
                       address: data.address,
                       bloodType: "A+",

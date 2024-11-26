@@ -21,7 +21,6 @@ export default function DashboardLayout({
   useEffect(() => {
     if (!isLoggedIn) {
       router.push("/");
-      console.log("first")
     } else {
       setIsLoading(false);
     }

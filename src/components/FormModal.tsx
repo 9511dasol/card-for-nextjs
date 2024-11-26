@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import TeacherForm from "./forms/TeacherForm";
+import StudentForm from "./forms/StudentForm";
+import { useRouter } from 'next/navigation';
 
 function FormModal({
   table,
@@ -27,6 +29,10 @@ function FormModal({
   data?: any;
   id?: number;
 }) {
+  const router = useRouter();
+  const handleDelete = () => {
+    router.refresh();
+  };
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
   const bgColor =
     type === "create"
@@ -35,19 +41,25 @@ function FormModal({
       ? "bg-lamaSky"
       : "bg-lamaPurple";
   const [open, setOpen] = useState<boolean>(false);
-
   const Form = () =>
     type === "delete" && id ? (
       <form action="" className="p-4 flex flex-col gap-4">
         <span className="text-center font-medium">
           All data will be lost. Are you sure you want to delete this {table}
         </span>
-        <button className="bg-red-700 text-white py-4 px-4 rounded-md border-none w-max self-center">
+        <button
+          className="bg-red-700 text-white py-4 px-4 rounded-md border-none w-max self-center"
+          onClick={() => setOpen(!open)}
+        >
           Delete
         </button>
       </form>
+    ) : table === "teacher" ? (
+      <TeacherForm type={type} data={data} />
+    ) : table === "student" ? (
+      <StudentForm type={type} data={data} />
     ) : (
-      <TeacherForm type="update" data={data}/>
+      <div className="flex justify-center items-center">작업중</div>
     );
 
   return (

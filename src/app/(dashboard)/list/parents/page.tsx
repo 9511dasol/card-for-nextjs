@@ -69,7 +69,6 @@ function ParentList() {
             {userRole === "ADMIN" && (
               <>
                 <FormModal table="parent" type="update" data={item} />
-                <FormModal table="parent" type="delete" id={item.id} />
               </>
             )}
           </div>
