@@ -1,4 +1,4 @@
-# Portfolio
+# School Dashboard
 학교 대시보드 
 
 ## 프로젝트 소개 🖥️
