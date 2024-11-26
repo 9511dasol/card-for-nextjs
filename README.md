@@ -1,5 +1,5 @@
 # Portfolio
-학교 대시보
+학교 대시보드 
 
 ## 프로젝트 소개 🖥️
 ■ 학교 현황 데이터 시각화
@@ -8,9 +8,19 @@
 
 ■ 개인 정보 조회, 수정, 생성 기능
 
-■ 참고사항: 데이터베이스 미연결로 인해 일부 기능이 제한됩니다.
 
-[demo](https://portfolio-six-tawny-63.vercel.app/)
+
+[demo](https://dashboard-six-sandy-75.vercel.app/)
+
+로그인 정보
+- 사용자명:
+	- a: admin
+	- p: parent
+	- t: teacher
+	- s: student
+	- 비밀번호: 아무 값 입력 가능
+
+■ 참고사항: 데이터베이스 미연결로 인해 일부 기능이 제한됩니다.
 
 
 ## 개발 기간 ⏱️
