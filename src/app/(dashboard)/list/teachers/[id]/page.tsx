@@ -14,7 +14,7 @@ interface IParams {
 }
 function Teacherpage({ params: { id } }: IParams) {
   const { isLoggedIn, userId, userRole } = useAppSelector((state) => state.auth);
-  const data: Teacher = teachersData[+id];
+  const data: Teacher = teachersData[+id]; // database
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
       {/* LEFT */}
